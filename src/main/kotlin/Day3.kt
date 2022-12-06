@@ -1,10 +1,17 @@
 object Day3: Day(3) {
 
-    private fun getCommonLetter(line: String): Char {
+    private fun getCompartments(line: String): List<String> {
         val compartmentLength = line.length / 2
-        val compartment1 = line.substring(0, compartmentLength).toSortedSet()
-        val compartment2 = line.substring(compartmentLength).toSortedSet()
-        val intersection = compartment1.intersect(compartment2)
+        val compartment1 = line.substring(0, compartmentLength)
+        val compartment2 = line.substring(compartmentLength)
+        return listOf(compartment1, compartment2)
+    }
+
+    private fun getCommonLetter(inputs: List<String>): Char {
+        var intersection = inputs[0].toSet()
+        for (input in inputs.drop(1)) {
+            intersection = intersection.intersect(input.toSet())
+        }
         return intersection.first()
     }
 
@@ -17,13 +24,20 @@ object Day3: Day(3) {
     }
 
     override fun getSolution(): Solution {
-        var total = 0
+        var part1Total = 0
         getInputFile().forEachLine {
+            val letter = getCommonLetter(getCompartments(it))
+            part1Total += getLetterPriority(letter)
+        }
+
+        var part2Total = 0
+        getInputFile().readLines().chunked(3).forEach {
             val letter = getCommonLetter(it)
-            total += getLetterPriority(letter)
+            part2Total += getLetterPriority(letter)
         }
         return Solution(
-            total.toString()
+            part1Total.toString(),
+            part2Total.toString()
         )
     }
 }
