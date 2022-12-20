@@ -9,6 +9,7 @@ fun main(/*args: Array<String>*/) {
             Day4,
             Day5,
             Day6,
+            Day7,
         )
 
     for (day in days) {
