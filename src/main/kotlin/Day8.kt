@@ -10,10 +10,6 @@ object Day8 : Day(8) {
             trees.add(row)
         }
 
-        //val visbility = List<List<Boolean>>(trees.count()) {
-        //    List<Boolean>(trees[0].count()) { false }
-        //}
-
         var visibleCount = 0
         var maxScenicScore = 0
 
